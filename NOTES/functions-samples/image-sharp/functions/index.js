@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-'use strict';
+"use strict";
 
-const functions = require('firebase-functions');
-const { Storage } = require('@google-cloud/storage');
-const path = require('path');
-const sharp = require('sharp');
+const functions = require("firebase-functions");
+const { Storage } = require("@google-cloud/storage");
+const path = require("path");
+const sharp = require("sharp");
 
 const THUMB_MAX_WIDTH = 200;
 const THUMB_MAX_HEIGHT = 200;
@@ -35,16 +35,16 @@ exports.generateThumbnail = functions.storage.object().onFinalize((object) => {
   const contentType = object.contentType; // File content type.
 
   // Exit if this is triggered on a file that is not an image.
-  if (!contentType.startsWith('image/')) {
-    functions.logger.log('This is not an image.');
+  if (!contentType.startsWith("image/")) {
+    functions.logger.log("This is not an image.");
     return null;
   }
 
   // Get the file name.
   const fileName = path.basename(filePath);
   // Exit if the image is already a thumbnail.
-  if (fileName.startsWith('thumb_')) {
-    functions.logger.log('Already a Thumbnail.');
+  if (fileName.startsWith("thumb_")) {
+    functions.logger.log("Already a Thumbnail.");
     return null;
   }
 
@@ -58,14 +58,20 @@ exports.generateThumbnail = functions.storage.object().onFinalize((object) => {
   const thumbFileName = `thumb_${fileName}`;
   const thumbFilePath = path.join(path.dirname(filePath), thumbFileName);
   // Create write stream for uploading thumbnail
-  const thumbnailUploadStream = bucket.file(thumbFilePath).createWriteStream({metadata});
+  const thumbnailUploadStream = bucket
+    .file(thumbFilePath)
+    .createWriteStream({ metadata });
 
   // Create Sharp pipeline for resizing the image and use pipe to read from bucket read stream
   const pipeline = sharp();
-  pipeline.resize(THUMB_MAX_WIDTH, THUMB_MAX_HEIGHT).max().pipe(thumbnailUploadStream);
+  pipeline
+    .resize(THUMB_MAX_WIDTH, THUMB_MAX_HEIGHT)
+    .max()
+    .pipe(thumbnailUploadStream);
 
   bucket.file(filePath).createReadStream().pipe(pipeline);
 
   return new Promise((resolve, reject) =>
-      thumbnailUploadStream.on('finish', resolve).on('error', reject));
+    thumbnailUploadStream.on("finish", resolve).on("error", reject)
+  );
 });

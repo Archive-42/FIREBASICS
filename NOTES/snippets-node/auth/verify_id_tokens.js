@@ -1,9 +1,9 @@
-'use strict';
-const { initializeApp } = require('firebase-admin/app');
-const { getAuth } = require('firebase-admin/auth');
+"use strict";
+const { initializeApp } = require("firebase-admin/app");
+const { getAuth } = require("firebase-admin/auth");
 initializeApp();
 
-const idToken = 'some_id_token';
+const idToken = "some_id_token";
 
 // [START verify_id_token]
 // idToken comes from the client app

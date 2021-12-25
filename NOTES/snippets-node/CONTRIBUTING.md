@@ -2,12 +2,12 @@
 
 We'd love for you to contribute to our source code and to make it even better than it is today! Here are the guidelines we'd like you to follow:
 
- - [Code of Conduct](#coc)
- - [Question or Problem?](#question)
- - [Issues and Bugs](#issue)
- - [Feature Requests](#feature)
- - [Submission Guidelines](#submit)
- - [Signing the CLA](#cla)
+- [Code of Conduct](#coc)
+- [Question or Problem?](#question)
+- [Issues and Bugs](#issue)
+- [Feature Requests](#feature)
+- [Submission Guidelines](#submit)
+- [Signing the CLA](#cla)
 
 ## <a name="coc"></a> Code of Conduct
 
@@ -52,53 +52,55 @@ Before you submit your issue search the archive, maybe your question was already
 
 If your issue appears to be a bug, and hasn't been reported, open a new issue.
 Help us to maximize the effort we can spend fixing issues and adding new
-features, by not reporting duplicate issues.  Providing the following information will increase the
+features, by not reporting duplicate issues. Providing the following information will increase the
 chances of your issue being dealt with quickly:
 
-* **Overview of the Issue** - if an error is being thrown a non-minified stack trace helps
-* **Motivation for or Use Case** - explain why this is a bug for you
-* **Reproduce the Error** - provide a live example or an unambiguous set of steps.
-* **Related Issues** - has a similar issue been reported before?
-* **Suggest a Fix** - if you can't fix the bug yourself, perhaps you can point to what might be
+- **Overview of the Issue** - if an error is being thrown a non-minified stack trace helps
+- **Motivation for or Use Case** - explain why this is a bug for you
+- **Reproduce the Error** - provide a live example or an unambiguous set of steps.
+- **Related Issues** - has a similar issue been reported before?
+- **Suggest a Fix** - if you can't fix the bug yourself, perhaps you can point to what might be
   causing the problem (line of code or commit)
 
 **If you get help, help others. Good karma rulez!**
 
 ### Submitting a Pull Request
+
 Before you submit your pull request consider the following guidelines:
 
-* Search for an open or closed Pull Request
+- Search for an open or closed Pull Request
   that relates to your submission. You don't want to duplicate effort.
-* Please sign our [Contributor License Agreement (CLA)](#cla) before
+- Please sign our [Contributor License Agreement (CLA)](#cla) before
   sending pull requests. We cannot accept code without this.
-* Make your changes in a new git branch:
+- Make your changes in a new git branch:
 
-     ```shell
-     git checkout -b my-fix-branch master
-     ```
+  ```shell
+  git checkout -b my-fix-branch master
+  ```
 
-* Create your patch, **including appropriate test cases**.
-* Commit your changes using a descriptive commit message.
+- Create your patch, **including appropriate test cases**.
+- Commit your changes using a descriptive commit message.
 
-     ```shell
-     git commit -a
-     ```
+  ```shell
+  git commit -a
+  ```
+
   Note: the optional commit `-a` command line option will automatically "add" and "rm" edited files.
 
-* Push your branch to your fork on GitHub (make sure you already have a fork!):
+- Push your branch to your fork on GitHub (make sure you already have a fork!):
 
-    ```shell
-    git push fork my-fix-branch
-    ```
+  ```shell
+  git push fork my-fix-branch
+  ```
 
-* In GitHub, send a pull request to `master`.
+- In GitHub, send a pull request to `master`.
 
 ## <a name="cla"></a> Signing the CLA
 
 Please sign our [Contributor License Agreement][google-cla] (CLA) before sending pull requests. For any code
 changes to be accepted, the CLA must be signed. It's a quick process, we promise!
 
-*This guide was inspired by the [AngularJS contribution guidelines](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md).*
+_This guide was inspired by the [AngularJS contribution guidelines](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md)._
 
 [google-cla]: https://cla.developers.google.com
 [style-guide]: http://google.github.io/styleguide/

@@ -1,11 +1,3 @@
-/**
-
- *
-
- *
-
- */
-
 // TODO(DEVELOPER): Import the Cloud Functions for Firebase and the Firebase Admin modules here.
 
 // TODO(DEVELOPER): Write the addWelcomeMessages Function here.

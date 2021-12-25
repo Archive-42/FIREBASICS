@@ -113,5 +113,4 @@ a quick process, we promise!
 [py-style-guide]: http://google.github.io/styleguide/pyguide.html
 [jsbin]: http://jsbin.com/
 [stackoverflow]: http://stackoverflow.com/questions/tagged/firebase
-[global-gitignore]:
-  https://help.github.com/articles/ignoring-files/#create-a-global-gitignore
+[global-gitignore]: https://help.github.com/articles/ignoring-files/#create-a-global-gitignore

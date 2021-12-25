@@ -1,16 +1,16 @@
-const { initializeApp } = require('firebase-admin/app');
-const { getStorage } = require('firebase-admin/storage');
+const { initializeApp } = require("firebase-admin/app");
+const { getStorage } = require("firebase-admin/storage");
 
 function initDefaultBucket() {
   // [START storage_init_default_bucket]
-  const { initializeApp, cert } = require('firebase-admin/app');
-  const { getStorage } = require('firebase-admin/storage');
+  const { initializeApp, cert } = require("firebase-admin/app");
+  const { getStorage } = require("firebase-admin/storage");
 
-  const serviceAccount = require('./path/to/serviceAccountKey.json');
+  const serviceAccount = require("./path/to/serviceAccountKey.json");
 
   initializeApp({
     credential: cert(serviceAccount),
-    storageBucket: '<BUCKET_NAME>.appspot.com'
+    storageBucket: "<BUCKET_NAME>.appspot.com",
   });
 
   const bucket = getStorage().bucket();
@@ -23,14 +23,17 @@ function initDefaultBucket() {
 
 function customBucket() {
   // [START storage_custom_bucket]
-  const bucket = getStorage().bucket('my-custom-bucket');
+  const bucket = getStorage().bucket("my-custom-bucket");
   // [END storage_custom_bucket]
 }
 
 function customApp() {
-  const customApp = initializeApp({
-    // ...
-  }, 'custom');
+  const customApp = initializeApp(
+    {
+      // ...
+    },
+    "custom"
+  );
 
   // [START storage_custom_app]
   const bucket = getStorage(customApp).bucket();

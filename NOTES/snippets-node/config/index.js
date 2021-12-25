@@ -1,27 +1,28 @@
-const { initializeApp } = require('firebase-admin/app');
-const { getRemoteConfig } = require('firebase-admin/remote-config');
+const { initializeApp } = require("firebase-admin/app");
+const { getRemoteConfig } = require("firebase-admin/remote-config");
 initializeApp();
 
 // [START validate_template]
 function validateTemplate(template) {
-  getRemoteConfig().validateTemplate(template)
-      .then((validatedTemplate) => {
-        // The template is valid and safe to use.
-        console.log('Template was valid and safe to use');
-      })
-      .catch((err) => {
-        console.error('Template is invalid and cannot be published');
-        console.error(err);
-      });
+  getRemoteConfig()
+    .validateTemplate(template)
+    .then((validatedTemplate) => {
+      // The template is valid and safe to use.
+      console.log("Template was valid and safe to use");
+    })
+    .catch((err) => {
+      console.error("Template is invalid and cannot be published");
+      console.error(err);
+    });
 }
 // [END validate_template]
 
 // [START add_new_condition]
 function addNewCondition(template) {
   template.conditions.push({
-    name: 'android_en',
-    expression: 'device.os == \'android\' && device.country in [\'us\', \'uk\']',
-    tagColor: 'BLUE',
+    name: "android_en",
+    expression: "device.os == 'android' && device.country in ['us', 'uk']",
+    tagColor: "BLUE",
   });
 }
 // [END add_new_condition]
@@ -29,13 +30,13 @@ function addNewCondition(template) {
 // [START set_modify_parameter]
 function setOrModifyParameter(template) {
   // Set header_text parameter.
-  template.parameters['header_text'] = {
+  template.parameters["header_text"] = {
     defaultValue: {
-      value: 'A Gryffindor must be brave, talented and helpful.'
+      value: "A Gryffindor must be brave, talented and helpful.",
     },
     conditionalValues: {
       android_en: {
-        value: 'A Droid must be brave, talented and helpful.'
+        value: "A Droid must be brave, talented and helpful.",
       },
     },
   };
@@ -45,19 +46,19 @@ function setOrModifyParameter(template) {
 // [START set_modify_parameter_group]
 function setOrModifyParameterGroup(template) {
   // Set new_menu parameter group
-  template.parameterGroups['new_menu'] = {
-    description: 'Description of the group.',
+  template.parameterGroups["new_menu"] = {
+    description: "Description of the group.",
     parameters: {
       pumpkin_spice_season: {
         defaultValue: {
-          value: 'A Gryffindor must love a pumpkin spice latte.'
+          value: "A Gryffindor must love a pumpkin spice latte.",
         },
         conditionalValues: {
           android_en: {
-            value: 'A Droid must love a pumpkin spice latte.'
+            value: "A Droid must love a pumpkin spice latte.",
           },
         },
-        description: 'Description of the parameter.',
+        description: "Description of the parameter.",
       },
     },
   };
@@ -66,11 +67,11 @@ function setOrModifyParameterGroup(template) {
 
 // [START add_parameter_to_group]
 function addParameterToGroup(template) {
-  template.parameterGroups['new_menu'].parameters['spring_season'] = {
+  template.parameterGroups["new_menu"].parameters["spring_season"] = {
     defaultValue: {
-      useInAppDefault: true
+      useInAppDefault: true,
     },
-    description: 'spring season menu visibility.',
+    description: "spring season menu visibility.",
   };
 }
 // [END add_parameter_to_group]

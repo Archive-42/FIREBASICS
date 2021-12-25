@@ -6,10 +6,12 @@ of data in Firestore.
 ## Setup
 
 ### 1 - Create a Project
+
 If you haven't already, create a new Firebase project and create a Cloud
 Firestore database within the project.
 
 ### 2 - Configure IAM
+
 This sample will use the AppEngine default service account to perform
 backups of your Firestore data. To do this, you will need to give
 the service account permission to access your data and save it to
@@ -32,6 +34,7 @@ $ gsutil iam ch \
 ```
 
 ### 3 - Configure Cron
+
 Open `cron.yaml` and edit this line:
 
 ```

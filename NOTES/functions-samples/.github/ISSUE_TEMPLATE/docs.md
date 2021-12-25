@@ -1,9 +1,9 @@
 ---
 name: Documentation issue
 about: Are a sample's docs incorrect or unclear?
-title: '[DOCS] for sample: '
-labels: ''
-assignees: ''
+title: "[DOCS] for sample: "
+labels: ""
+assignees: ""
 ---
 
 <!-- This is only for issues with the documentation in this repository. -->

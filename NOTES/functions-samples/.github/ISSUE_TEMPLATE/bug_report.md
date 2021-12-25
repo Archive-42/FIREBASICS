@@ -1,9 +1,9 @@
 ---
 name: Bug report
 about: Report an issue with a specific sample
-title: '[BUG] in sample: '
-labels: 'type: bug'
-assignees: ''
+title: "[BUG] in sample: "
+labels: "type: bug"
+assignees: ""
 ---
 
 ### Which sample has a bug?

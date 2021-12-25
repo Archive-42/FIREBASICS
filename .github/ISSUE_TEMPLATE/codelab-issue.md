@@ -1,10 +1,9 @@
 ---
 name: Codelab issue
 about: Report an error in a codelab that uses friendlychat-web
-title: ''
+title: ""
 labels: codelab
-assignees: ''
-
+assignees: ""
 ---
 
 ### [REQUIRED] Codelab info
@@ -17,6 +16,6 @@ assignees: ''
 
 ### [REQUIRED] Describe the problem
 
-<!-- Is it a grammatical error, incorrect code snippet, or are you running into an unknown bug? --> 
+<!-- Is it a grammatical error, incorrect code snippet, or are you running into an unknown bug? -->
 
 ### [Optional] Suggested fix

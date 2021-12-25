@@ -1,6 +1,6 @@
-const util = require('util');
-const { initializeApp } = require('firebase-admin/app');
-const { getFirestore, Timestamp } = require('firebase-admin/firestore');
+const util = require("util");
+const { initializeApp } = require("firebase-admin/app");
+const { getFirestore, Timestamp } = require("firebase-admin/firestore");
 
 initializeApp();
 
@@ -10,7 +10,7 @@ const MAX_IN_VALUES = 10;
 
 // [START fs_sharded_timestamps_define_shards]
 // Define our 'K' shard values
-const shards = ['x', 'y', 'z'];
+const shards = ["x", "y", "z"];
 // Define a function to help 'chunk' our shards for use in queries.
 // When using the 'in' query filter there is a max number of values that can be
 // included in the value. If our number of shards is higher than that limit
@@ -38,46 +38,43 @@ function randomShard() {
 async function insertData() {
   const instruments = [
     {
-      shard: randomShard(),  // add the new shard field to the document
-      symbol: 'AAA',
+      shard: randomShard(), // add the new shard field to the document
+      symbol: "AAA",
       price: {
-        currency: 'USD',
-        micros: 34790000
+        currency: "USD",
+        micros: 34790000,
       },
-      exchange: 'EXCHG1',
-      instrumentType: 'commonstock',
-      timestamp: Timestamp.fromMillis(
-          Date.parse('2019-01-01T13:45:23.010Z'))
+      exchange: "EXCHG1",
+      instrumentType: "commonstock",
+      timestamp: Timestamp.fromMillis(Date.parse("2019-01-01T13:45:23.010Z")),
     },
     {
-      shard: randomShard(),  // add the new shard field to the document
-      symbol: 'BBB',
+      shard: randomShard(), // add the new shard field to the document
+      symbol: "BBB",
       price: {
-        currency: 'JPY',
-        micros: 64272000000
+        currency: "JPY",
+        micros: 64272000000,
       },
-      exchange: 'EXCHG2',
-      instrumentType: 'commonstock',
-      timestamp: Timestamp.fromMillis(
-          Date.parse('2019-01-01T13:45:23.101Z'))
+      exchange: "EXCHG2",
+      instrumentType: "commonstock",
+      timestamp: Timestamp.fromMillis(Date.parse("2019-01-01T13:45:23.101Z")),
     },
     {
-      shard: randomShard(),  // add the new shard field to the document
-      symbol: 'Index1 ETF',
+      shard: randomShard(), // add the new shard field to the document
+      symbol: "Index1 ETF",
       price: {
-        currency: 'USD',
-        micros: 473000000
+        currency: "USD",
+        micros: 473000000,
       },
-      exchange: 'EXCHG1',
-      instrumentType: 'etf',
-      timestamp: Timestamp.fromMillis(
-          Date.parse('2019-01-01T13:45:23.001Z'))
-    }
+      exchange: "EXCHG1",
+      instrumentType: "etf",
+      timestamp: Timestamp.fromMillis(Date.parse("2019-01-01T13:45:23.001Z")),
+    },
   ];
 
   const batch = fs.batch();
   for (const inst of instruments) {
-    const ref = fs.collection('instruments').doc();
+    const ref = fs.collection("instruments").doc();
     batch.set(ref, inst);
   }
 
@@ -90,14 +87,18 @@ async function insertData() {
 function createQuery(fieldName, fieldOperator, fieldValue, limit = 5) {
   // For each shard value, map it to a new query which adds an additional
   // where clause specifying the shard value.
-  return Promise.all(shardChunks().map(shardChunk => {
-        return fs.collection('instruments')
-            .where('shard', 'in', shardChunk)  // new shard condition
-            .where(fieldName, fieldOperator, fieldValue)
-            .orderBy('timestamp', 'desc')
-            .limit(limit)
-            .get();
-      }))
+  return (
+    Promise.all(
+      shardChunks().map((shardChunk) => {
+        return fs
+          .collection("instruments")
+          .where("shard", "in", shardChunk) // new shard condition
+          .where(fieldName, fieldOperator, fieldValue)
+          .orderBy("timestamp", "desc")
+          .limit(limit)
+          .get();
+      })
+    )
       // Now that we have a promise of multiple possible query results, we need
       // to merge the results from all of the queries into a single result set.
       .then((snapshots) => {
@@ -116,7 +117,7 @@ function createQuery(fieldName, fieldOperator, fieldValue, limit = 5) {
         } else {
           // When multiple query results are returned we need to sort the
           // results after they have been concatenated.
-          // 
+          //
           // since we're wanting the `limit` newest values, sort the array
           // descending and take the first `limit` values. By returning negated
           // values we can easily get a descending value.
@@ -132,53 +133,44 @@ function createQuery(fieldName, fieldOperator, fieldValue, limit = 5) {
           });
           return docs.slice(0, limit);
         }
-      });
+      })
+  );
 }
 
 function queryCommonStock() {
-  return createQuery('instrumentType', '==', 'commonstock');
+  return createQuery("instrumentType", "==", "commonstock");
 }
 
 function queryExchange1Instruments() {
-  return createQuery('exchange', '==', 'EXCHG1');
+  return createQuery("exchange", "==", "EXCHG1");
 }
 
 function queryUSDInstruments() {
-  return createQuery('price.currency', '==', 'USD');
+  return createQuery("price.currency", "==", "USD");
 }
 
 // [END fs_sharded_timestamps_post_query]
 
 // [START fs_sharded_timestamps_post_exec]
-insertData()
-    .then(() => {
-      const commonStock = queryCommonStock()
-          .then(
-              (docs) => {
-                console.log('--- queryCommonStock: ');
-                docs.forEach((doc) => {
-                  console.log(`doc = ${util.inspect(doc.data(), {depth: 4})}`);
-                });
-              }
-          );
-      const exchange1Instruments = queryExchange1Instruments()
-          .then(
-              (docs) => {
-                console.log('--- queryExchange1Instruments: ');
-                docs.forEach((doc) => {
-                  console.log(`doc = ${util.inspect(doc.data(), {depth: 4})}`);
-                });
-              }
-          );
-      const usdInstruments = queryUSDInstruments()
-          .then(
-              (docs) => {
-                console.log('--- queryUSDInstruments: ');
-                docs.forEach((doc) => {
-                  console.log(`doc = ${util.inspect(doc.data(), {depth: 4})}`);
-                });
-              }
-          );
-      return Promise.all([commonStock, exchange1Instruments, usdInstruments]);
+insertData().then(() => {
+  const commonStock = queryCommonStock().then((docs) => {
+    console.log("--- queryCommonStock: ");
+    docs.forEach((doc) => {
+      console.log(`doc = ${util.inspect(doc.data(), { depth: 4 })}`);
     });
+  });
+  const exchange1Instruments = queryExchange1Instruments().then((docs) => {
+    console.log("--- queryExchange1Instruments: ");
+    docs.forEach((doc) => {
+      console.log(`doc = ${util.inspect(doc.data(), { depth: 4 })}`);
+    });
+  });
+  const usdInstruments = queryUSDInstruments().then((docs) => {
+    console.log("--- queryUSDInstruments: ");
+    docs.forEach((doc) => {
+      console.log(`doc = ${util.inspect(doc.data(), { depth: 4 })}`);
+    });
+  });
+  return Promise.all([commonStock, exchange1Instruments, usdInstruments]);
+});
 // [END fs_sharded_timestamps_post_exec]

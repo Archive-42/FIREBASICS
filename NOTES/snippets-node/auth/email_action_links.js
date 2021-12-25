@@ -1,31 +1,31 @@
-'use strict';
-const { initializeApp } = require('firebase-admin/app');
-const { getAuth } = require('firebase-admin/auth');
+"use strict";
+const { initializeApp } = require("firebase-admin/app");
+const { getAuth } = require("firebase-admin/auth");
 initializeApp();
 
 // [START init_action_code_settings]
 const actionCodeSettings = {
   // URL you want to redirect back to. The domain (www.example.com) for
   // this URL must be whitelisted in the Firebase Console.
-  url: 'https://www.example.com/checkout?cartId=1234',
+  url: "https://www.example.com/checkout?cartId=1234",
   // This must be true for email link sign-in.
   handleCodeInApp: true,
   iOS: {
-    bundleId: 'com.example.ios',
+    bundleId: "com.example.ios",
   },
   android: {
-    packageName: 'com.example.android',
+    packageName: "com.example.android",
     installApp: true,
-    minimumVersion: '12',
+    minimumVersion: "12",
   },
   // FDL custom domain.
-  dynamicLinkDomain: 'coolapp.page.link',
+  dynamicLinkDomain: "coolapp.page.link",
 };
 // [END init_action_code_settings]
 
 // [START password_reset_link]
 // Admin SDK API to generate the password reset link.
-const userEmail = 'user@example.com';
+const userEmail = "user@example.com";
 getAuth()
   .generatePasswordResetLink(userEmail, actionCodeSettings)
   .then((link) => {
@@ -40,7 +40,7 @@ getAuth()
 
 // [START email_verification_link]
 // Admin SDK API to generate the email verification link.
-const useremail = 'user@example.com';
+const useremail = "user@example.com";
 getAuth()
   .generateEmailVerificationLink(useremail, actionCodeSettings)
   .then((link) => {
@@ -55,7 +55,7 @@ getAuth()
 
 // [START sign_in_with_email_link]
 // Admin SDK API to generate the sign in with email link.
-const usremail = 'user@example.com';
+const usremail = "user@example.com";
 getAuth()
   .generateSignInWithEmailLink(usremail, actionCodeSettings)
   .then((link) => {

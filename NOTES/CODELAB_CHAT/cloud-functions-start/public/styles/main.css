@@ -1,15 +1,9 @@
-/**
-
- *
-
- *
-
- */
-
- html, body {
-  font-family: 'Roboto', 'Helvetica', sans-serif;
+html,
+body {
+  font-family: "Roboto", "Helvetica", sans-serif;
 }
-main, #messages-card {
+main,
+#messages-card {
   height: 100%;
   padding-bottom: 0;
 }
@@ -68,7 +62,7 @@ main, #messages-card {
   opacity: 1;
 }
 .message-container .pic {
-  background-image: url('/images/profile_placeholder.png');
+  background-image: url("/images/profile_placeholder.png");
   background-repeat: no-repeat;
   width: 30px;
   height: 30px;
@@ -108,7 +102,8 @@ main, #messages-card {
 #message-form .mdl-textfield {
   width: calc(100% - 100px);
 }
-#message-form button, #image-form button {
+#message-form button,
+#image-form button {
   width: 100px;
   margin: 15px 0 0 10px;
 }
@@ -134,7 +129,7 @@ main, #messages-card {
   top: -3px;
   position: relative;
   display: inline-block;
-  background-image: url('/images/profile_placeholder.png');
+  background-image: url("/images/profile_placeholder.png");
   background-repeat: no-repeat;
   width: 40px;
   height: 40px;
@@ -169,7 +164,7 @@ main, #messages-card {
   }
   #user-container {
     top: 72px;
-    background-color: rgb(3,155,229);
+    background-color: rgb(3, 155, 229);
     height: 38px;
     padding-top: 3px;
     padding-right: 2px;
@@ -182,10 +177,10 @@ main, #messages-card {
   }
 }
 .mdl-textfield__label:after {
-  background-color: #0288D1;
+  background-color: #0288d1;
 }
 .mdl-textfield--floating-label.is-focused .mdl-textfield__label {
-  color: #0288D1;
+  color: #0288d1;
 }
 .mdl-button .material-icons {
   top: -1px;

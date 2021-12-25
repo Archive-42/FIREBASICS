@@ -1,14 +1,14 @@
-'use strict';
-const { initializeApp } = require('firebase-admin/app');
-const { getAuth } = require('firebase-admin/auth');
+"use strict";
+const { initializeApp } = require("firebase-admin/app");
+const { getAuth } = require("firebase-admin/auth");
 initializeApp();
 
-const uid = 'some_uid_1234';
-const uid1 = 'some_uid_1';
-const uid2 = 'some_uid_2';
-const uid3 = 'some_uid_3';
-const email = 'someone@example.com';
-const phoneNumber = '+15558675309';
+const uid = "some_uid_1234";
+const uid1 = "some_uid_1";
+const uid2 = "some_uid_2";
+const uid3 = "some_uid_3";
+const email = "someone@example.com";
+const phoneNumber = "+15558675309";
 
 // [START get_user_by_id]
 getAuth()
@@ -18,7 +18,7 @@ getAuth()
     console.log(`Successfully fetched user data: ${userRecord.toJSON()}`);
   })
   .catch((error) => {
-    console.log('Error fetching user data:', error);
+    console.log("Error fetching user data:", error);
   });
 // [END get_user_by_id]
 
@@ -30,7 +30,7 @@ getAuth()
     console.log(`Successfully fetched user data: ${userRecord.toJSON()}`);
   })
   .catch((error) => {
-    console.log('Error fetching user data:', error);
+    console.log("Error fetching user data:", error);
   });
 // [END get_user_by_email]
 
@@ -42,87 +42,87 @@ getAuth()
     console.log(`Successfully fetched user data:  ${userRecord.toJSON()}`);
   })
   .catch((error) => {
-    console.log('Error fetching user data:', error);
+    console.log("Error fetching user data:", error);
   });
 // [END get_user_by_phone]
 
 // [START bulk_get_users]
 getAuth()
   .getUsers([
-    { uid: 'uid1' },
-    { email: 'user2@example.com' },
-    { phoneNumber: '+15555550003' },
-    { providerId: 'google.com', providerUid: 'google_uid4' },
+    { uid: "uid1" },
+    { email: "user2@example.com" },
+    { phoneNumber: "+15555550003" },
+    { providerId: "google.com", providerUid: "google_uid4" },
   ])
   .then((getUsersResult) => {
-    console.log('Successfully fetched user data:');
+    console.log("Successfully fetched user data:");
     getUsersResult.users.forEach((userRecord) => {
       console.log(userRecord);
     });
 
-    console.log('Unable to find users corresponding to these identifiers:');
+    console.log("Unable to find users corresponding to these identifiers:");
     getUsersResult.notFound.forEach((userIdentifier) => {
       console.log(userIdentifier);
     });
   })
   .catch((error) => {
-    console.log('Error fetching user data:', error);
+    console.log("Error fetching user data:", error);
   });
 // [END bulk_get_users]
 
 // [START create_user]
 getAuth()
   .createUser({
-    email: 'user@example.com',
+    email: "user@example.com",
     emailVerified: false,
-    phoneNumber: '+11234567890',
-    password: 'secretPassword',
-    displayName: 'John Doe',
-    photoURL: 'http://www.example.com/12345678/photo.png',
+    phoneNumber: "+11234567890",
+    password: "secretPassword",
+    displayName: "John Doe",
+    photoURL: "http://www.example.com/12345678/photo.png",
     disabled: false,
   })
   .then((userRecord) => {
     // See the UserRecord reference doc for the contents of userRecord.
-    console.log('Successfully created new user:', userRecord.uid);
+    console.log("Successfully created new user:", userRecord.uid);
   })
   .catch((error) => {
-    console.log('Error creating new user:', error);
+    console.log("Error creating new user:", error);
   });
 // [END create_user]
 
 // [START create_user_with_uid]
 getAuth()
   .createUser({
-    uid: 'some-uid',
-    email: 'user@example.com',
-    phoneNumber: '+11234567890',
+    uid: "some-uid",
+    email: "user@example.com",
+    phoneNumber: "+11234567890",
   })
   .then((userRecord) => {
     // See the UserRecord reference doc for the contents of userRecord.
-    console.log('Successfully created new user:', userRecord.uid);
+    console.log("Successfully created new user:", userRecord.uid);
   })
   .catch((error) => {
-    console.log('Error creating new user:', error);
+    console.log("Error creating new user:", error);
   });
 // [END create_user_with_uid]
 
 // [START update_user]
 getAuth()
   .updateUser(uid, {
-    email: 'modifiedUser@example.com',
-    phoneNumber: '+11234567890',
+    email: "modifiedUser@example.com",
+    phoneNumber: "+11234567890",
     emailVerified: true,
-    password: 'newPassword',
-    displayName: 'Jane Doe',
-    photoURL: 'http://www.example.com/12345678/photo.png',
+    password: "newPassword",
+    displayName: "Jane Doe",
+    photoURL: "http://www.example.com/12345678/photo.png",
     disabled: true,
   })
   .then((userRecord) => {
     // See the UserRecord reference doc for the contents of userRecord.
-    console.log('Successfully updated user', userRecord.toJSON());
+    console.log("Successfully updated user", userRecord.toJSON());
   })
   .catch((error) => {
-    console.log('Error updating user:', error);
+    console.log("Error updating user:", error);
   });
 // [END update_user]
 
@@ -130,10 +130,10 @@ getAuth()
 getAuth()
   .deleteUser(uid)
   .then(() => {
-    console.log('Successfully deleted user');
+    console.log("Successfully deleted user");
   })
   .catch((error) => {
-    console.log('Error deleting user:', error);
+    console.log("Error deleting user:", error);
   });
 // [END delete_user]
 
@@ -148,7 +148,7 @@ getAuth()
     });
   })
   .catch((error) => {
-    console.log('Error deleting users:', error);
+    console.log("Error deleting users:", error);
   });
 // [END bulk_delete_users]
 
@@ -159,7 +159,7 @@ const listAllUsers = (nextPageToken) => {
     .listUsers(1000, nextPageToken)
     .then((listUsersResult) => {
       listUsersResult.users.forEach((userRecord) => {
-        console.log('user', userRecord.toJSON());
+        console.log("user", userRecord.toJSON());
       });
       if (listUsersResult.pageToken) {
         // List next batch of users.
@@ -167,7 +167,7 @@ const listAllUsers = (nextPageToken) => {
       }
     })
     .catch((error) => {
-      console.log('Error listing users:', error);
+      console.log("Error listing users:", error);
     });
 };
 // Start listing users from the beginning, 1000 at a time.

@@ -1,13 +1,13 @@
-'use strict';
-const { initializeApp } = require('firebase-admin/app');
-const { getAuth } = require('firebase-admin/auth');
-const { getDatabase } = require('firebase-admin/database');
+"use strict";
+const { initializeApp } = require("firebase-admin/app");
+const { getAuth } = require("firebase-admin/auth");
+const { getDatabase } = require("firebase-admin/database");
 initializeApp();
 
-const express = require('express');
+const express = require("express");
 
-const uid = 'firebaseUserId123';
-const idToken = 'some-invalid-token';
+const uid = "firebaseUserId123";
+const idToken = "some-invalid-token";
 
 // [START set_custom_user_claims]
 // Set admin privilege on the user corresponding to uid.
@@ -37,13 +37,13 @@ getAuth()
   .getUser(uid)
   .then((userRecord) => {
     // The claims can be accessed on the user record.
-    console.log(userRecord.customClaims['admin']);
+    console.log(userRecord.customClaims["admin"]);
   });
 // [END read_custom_user_claims]
 
 // [START set_custom_user_claims_script]
 getAuth()
-  .getUserByEmail('user@admin.example.com')
+  .getUserByEmail("user@admin.example.com")
   .then((user) => {
     // Confirm user is verified.
     if (user.emailVerified) {
@@ -61,13 +61,13 @@ getAuth()
 
 // [START set_custom_user_claims_incremental]
 getAuth()
-  .getUserByEmail('user@admin.example.com')
+  .getUserByEmail("user@admin.example.com")
   .then((user) => {
     // Add incremental custom claim without overwriting existing claims.
     const currentCustomClaims = user.customClaims;
-    if (currentCustomClaims['admin']) {
+    if (currentCustomClaims["admin"]) {
       // Add level.
-      currentCustomClaims['accessLevel'] = 10;
+      currentCustomClaims["accessLevel"] = 10;
       // Add custom claims for additional privileges.
       return getAuth().setCustomUserClaims(user.uid, currentCustomClaims);
     }
@@ -81,7 +81,7 @@ function customClaimsServer() {
   const app = express();
 
   // [START auth_custom_claims_server]
-  app.post('/setCustomClaims', async (req, res) => {
+  app.post("/setCustomClaims", async (req, res) => {
     // Get the ID token passed.
     const idToken = req.body.idToken;
 
@@ -90,23 +90,25 @@ function customClaimsServer() {
 
     // Verify user is eligible for additional privileges.
     if (
-      typeof claims.email !== 'undefined' &&
-      typeof claims.email_verified !== 'undefined' &&
+      typeof claims.email !== "undefined" &&
+      typeof claims.email_verified !== "undefined" &&
       claims.email_verified &&
-      claims.email.endsWith('@admin.example.com')
+      claims.email.endsWith("@admin.example.com")
     ) {
       // Add custom claims for additional privileges.
       await getAuth().setCustomUserClaims(claims.sub, {
-        admin: true
+        admin: true,
       });
 
       // Tell client to refresh token on user.
-      res.end(JSON.stringify({
-        status: 'success'
-      }));
+      res.end(
+        JSON.stringify({
+          status: "success",
+        })
+      );
     } else {
       // Return nothing.
-      res.end(JSON.stringify({ status: 'ineligible' }));
+      res.end(JSON.stringify({ status: "ineligible" }));
     }
   });
   // [END auth_custom_claims_server]

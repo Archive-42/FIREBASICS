@@ -1,10 +1,9 @@
 ---
 name: Bug report
 about: Reproducible problems with the friendlychat-web source code
-title: ''
+title: ""
 labels: bug
-assignees: ''
-
+assignees: ""
 ---
 
 <!-- If you're reporting an issue in a codelab's instructions, please use the "Codelab issue" template instead -->
@@ -14,6 +13,7 @@ A clear and concise description of what the bug is.
 
 **To Reproduce**
 Steps to reproduce the behavior:
+
 1. Go to '...'
 2. Click on '....'
 3. Scroll down to '....'

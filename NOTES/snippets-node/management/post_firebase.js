@@ -1,30 +1,30 @@
-const { applicationDefault } = require('firebase-admin/app');
-const requestPromise = require('request-promise');
+const { applicationDefault } = require("firebase-admin/app");
+const requestPromise = require("request-promise");
 
 export function getAccessToken() {
-  return applicationDefault().getAccessToken()
-      .then(accessToken => {
-        return accessToken.access_token;
-      })
-      .catch(err => {
-        console.log('Unable to get access token');
-        console.log(err);
-      });
+  return applicationDefault()
+    .getAccessToken()
+    .then((accessToken) => {
+      return accessToken.access_token;
+    })
+    .catch((err) => {
+      console.log("Unable to get access token");
+      console.log(err);
+    });
 }
-
 
 // [START add_ios_app]
 async function addIosApp(projectId, displayName, bundleId) {
   const accessToken = await getAccessToken();
   const options = {
-    uri: 'https://firebase.googleapis.com/v1beta1/' + projectId + '/iosApps',
-    method: 'POST',
+    uri: "https://firebase.googleapis.com/v1beta1/" + projectId + "/iosApps",
+    method: "POST",
     headers: {
-      'Authorization': 'Bearer ' + accessToken,
+      Authorization: "Bearer " + accessToken,
     },
     body: {
-      'displayName': displayName,
-      'bundleId': bundleId
+      displayName: displayName,
+      bundleId: bundleId,
     },
     json: true,
   };
@@ -32,8 +32,8 @@ async function addIosApp(projectId, displayName, bundleId) {
   try {
     const resp = await requestPromise(options);
     console.log(JSON.stringify(resp));
-  } catch(err) {
-    console.error(err['message']);
+  } catch (err) {
+    console.error(err["message"]);
   }
 }
 // [END add_ios_app]
@@ -42,14 +42,15 @@ async function addIosApp(projectId, displayName, bundleId) {
 async function addAndroidApp(projectId, displayName, packageName) {
   const accessToken = await getAccessToken();
   const options = {
-    uri: 'https://firebase.googleapis.com/v1beta1/' + projectId + '/androidApps',
-    method: 'POST',
+    uri:
+      "https://firebase.googleapis.com/v1beta1/" + projectId + "/androidApps",
+    method: "POST",
     headers: {
-      'Authorization': 'Bearer ' + accessToken,
+      Authorization: "Bearer " + accessToken,
     },
     body: {
-      'displayName': displayName,
-      'packageName': packageName
+      displayName: displayName,
+      packageName: packageName,
     },
     json: true,
   };
@@ -57,8 +58,8 @@ async function addAndroidApp(projectId, displayName, packageName) {
   try {
     const resp = await requestPromise(options);
     console.log(JSON.stringify(resp));
-  } catch(err) {
-    console.error(err['message']);
+  } catch (err) {
+    console.error(err["message"]);
   }
 }
 // [END add_android_app]
@@ -67,13 +68,13 @@ async function addAndroidApp(projectId, displayName, packageName) {
 async function addWebApp(projectId, displayName) {
   const accessToken = await getAccessToken();
   const options = {
-    uri: 'https://firebase.googleapis.com/v1beta1/' + projectId + '/webApps',
-    method: 'POST',
+    uri: "https://firebase.googleapis.com/v1beta1/" + projectId + "/webApps",
+    method: "POST",
     headers: {
-      'Authorization': 'Bearer ' + accessToken,
+      Authorization: "Bearer " + accessToken,
     },
     body: {
-      'displayName': displayName
+      displayName: displayName,
     },
     json: true,
   };
@@ -81,8 +82,8 @@ async function addWebApp(projectId, displayName) {
   try {
     const resp = await requestPromise(options);
     console.log(JSON.stringify(resp));
-  } catch(err) {
-    console.error(err['message']);
+  } catch (err) {
+    console.error(err["message"]);
   }
 }
 // [END add_web_app]
@@ -91,13 +92,16 @@ async function addWebApp(projectId, displayName) {
 async function finalizeProjectLocation(projectId, locationId) {
   const accessToken = await getAccessToken();
   const options = {
-    uri: 'https://firebase.googleapis.com/v1beta1/' + projectId + '/defaultLocation:finalize',
-    method: 'POST',
+    uri:
+      "https://firebase.googleapis.com/v1beta1/" +
+      projectId +
+      "/defaultLocation:finalize",
+    method: "POST",
     headers: {
-      'Authorization': 'Bearer ' + accessToken,
+      Authorization: "Bearer " + accessToken,
     },
     body: {
-      'locationId': locationId
+      locationId: locationId,
     },
     json: true,
   };
@@ -105,8 +109,8 @@ async function finalizeProjectLocation(projectId, locationId) {
   try {
     const resp = await requestPromise(options);
     console.log(JSON.stringify(resp));
-  } catch(err) {
-    console.error(err['message']);
+  } catch (err) {
+    console.error(err["message"]);
   }
 }
 // [END finalize_location]
